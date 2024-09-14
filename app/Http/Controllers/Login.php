@@ -40,6 +40,7 @@ class Login extends Controller
                 return redirect('login')->with(['warning' => 'Anda tidak bisa login. Akun Anda tidak aktif']);
             }
         }else{
+            // if login failed redirect to login page
             return redirect('login')->with(['warning' => 'Anda gagal login. Username atau password salah.']);
         }
     }
