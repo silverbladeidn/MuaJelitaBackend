@@ -60,6 +60,7 @@ class Login extends Controller
     // lupa
     public function lupa()
     {
+        // halaman login lupa password
         $data = [   'title'     => 'Lupa Password',
                     'content'   => 'login/lupa'
                 ];
