@@ -20,6 +20,7 @@ class Login extends Controller
     // proses login
     public function proses(Request $request)
     {
+        // call all of the model related to login
         $m_user     = new User_model();
         $username   = $request->username;
         $password   = $request->password;
