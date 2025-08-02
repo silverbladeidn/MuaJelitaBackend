@@ -11,9 +11,10 @@ class Dasbor extends Controller
     // index
     public function index()
     {
-        $data = [   'title'     => 'Halaman Dashboard',
-                    'content'   => 'admin/dasbor/index'
-                ];
-        return view('admin/layout/wrapper',$data);
+        $data = [
+            'title'     => 'MUA By Jelita - Backend',
+            'content'   => 'admin/dasbor/index'
+        ];
+        return view('admin/layout/wrapper', $data);
     }
 }

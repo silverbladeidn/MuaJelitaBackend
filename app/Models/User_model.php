@@ -15,7 +15,7 @@ class User_model extends Model
     {
         $query = DB::table('users')
             ->select('*')
-            ->orderBy('users.id_user','DESC')
+            ->orderBy('users.id_user', 'DESC')
             ->get();
         return $query;
     }
@@ -25,20 +25,31 @@ class User_model extends Model
     {
         $query = DB::table('users')
             ->select('*')
-            ->where('users.id_user',$id_user)
-            ->orderBy('users.id_user','DESC')
+            ->where('users.id_user', $id_user)
+            ->orderBy('users.id_user', 'DESC')
             ->first();
         return $query;
     }
 
-    // login
-    public function login($username,$password)
+    // token
+    public function token($token)
     {
         $query = DB::table('users')
             ->select('*')
-            ->where('users.username',$username)
-            ->where('users.password',sha1($password))
-            ->orderBy('users.id_user','DESC')
+            ->where('users.token', $token)
+            ->orderBy('users.id_user', 'DESC')
+            ->count();
+        return $query;
+    }
+
+    // login
+    public function login($username, $password)
+    {
+        $query = DB::table('users')
+            ->select('*')
+            ->where('users.username', $username)
+            ->where('users.password', md5($password))
+            ->orderBy('users.id_user', 'DESC')
             ->first();
         return $query;
     }

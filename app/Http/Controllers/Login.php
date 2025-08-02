@@ -11,10 +11,11 @@ class Login extends Controller
     // index
     public function index()
     {
-        $data = [   'title'     => 'Halaman Login',
-                    'content'   => 'login/index'
-                ];
-        return view('login/wrapper',$data);
+        $data = [
+            'title'     => 'Halaman Login',
+            'content'   => 'login/index'
+        ];
+        return view('login/wrapper', $data);
     }
 
     // proses login
@@ -24,24 +25,22 @@ class Login extends Controller
         $m_user     = new User_model();
         $username   = $request->username;
         $password   = $request->password;
-        $user       = $m_user->login($username,$password);
+        $user       = $m_user->login($username, $password);
         // check username dan password
-        if($user) 
-        {
-            if($user->status_user=='Aktif') 
-            {
+        if ($user) {
+            if ($user->status_user == 'Aktif') {
                 $request->session()->put('id_user', $user->id_user);
                 $request->session()->put('nama', $user->nama);
                 $request->session()->put('username', $user->username);
                 $request->session()->put('akses_level', $user->akses_level);
                 $request->session()->put('status_user', $user->status_user);
-                return redirect('admin/dasbor')->with(['sukses' => 'Anda berhasil login']);
-            }else{
-                return redirect('login')->with(['warning' => 'Anda tidak bisa login. Akun Anda tidak aktif']);
+                return redirect('admin/user')->with(['sukses' => 'Anda berhasil login']);
+            } else {
+                return redirect('/')->with(['warning' => 'Anda tidak bisa login. Akun Anda tidak aktif']);
             }
-        }else{
+        } else {
             // if login failed redirect to login page
-            return redirect('login')->with(['warning' => 'Anda gagal login. Username atau password salah.']);
+            return redirect('/')->with(['warning' => 'Anda gagal login. Username atau password salah.']);
         }
     }
 
@@ -49,22 +48,23 @@ class Login extends Controller
     public function logout()
     {
         // proses logout
-        Session()->forget('id_pegawai');
+        Session()->forget('id_user');
         Session()->forget('username');
         Session()->forget('nama');
         Session()->forget('akses_level');
         Session()->forget('status_user');
         // logout end
-        return redirect('login')->with(['sukses' => 'Anda berhasil logout.']);
+        return redirect('/')->with(['sukses' => 'Anda berhasil logout.']);
     }
 
     // lupa
     public function lupa()
     {
         // halaman login lupa password
-        $data = [   'title'     => 'Lupa Password',
-                    'content'   => 'login/lupa'
-                ];
-        return view('login/wrapper',$data);
+        $data = [
+            'title'     => 'Lupa Password',
+            'content'   => 'login/lupa'
+        ];
+        return view('login/wrapper', $data);
     }
 }

@@ -26,7 +26,6 @@
 
     @include($content)
 
-
 <script>
 // notifikasi
 <?php if(Session::get('sukses')) { ?>
